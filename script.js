@@ -1,5 +1,7 @@
 const menuToggle = document.getElementById("menuToggle");
 const navLinks = document.getElementById("navLinks");
+const themeToggle = document.getElementById("themeToggle");
+const projectGrid = document.getElementById("projectGrid");
 
 if (menuToggle && navLinks) {
   menuToggle.addEventListener("click", () => {
@@ -13,50 +15,76 @@ if (menuToggle && navLinks) {
   });
 }
 
-const SUPABASE_URL = "sb_publishable_kBNG-nig0ROdWofVk1bvYw_1soqZWnu";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVrc3RldmZwdGJ5cm1sb2ZoY29xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI4NDg1MjIsImV4cCI6MjA4ODQyNDUyMn0.YTU04AepLP1ifOSdWczeqH8ZFCGdl0z-viyj7wQV6o8";
-
-const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-async function loadProjects() {
-  const container = document.querySelector(".project-grid");
-  if (!container) return;
-
-  const { data, error } = await db
-    .from("projects")
-    .select("*")
-    .order("created_at", { ascending: false });
-
-  if (error) {
-    console.error("Supabase error:", error);
-    container.innerHTML = `
-      <div class="project-card muted">
-        <p class="project-label">Error</p>
-        <h3>Projects could not be loaded</h3>
-        <p>Check your Supabase URL, key, table, and policy.</p>
-      </div>
-    `;
-    return;
-  }
-
-  if (!data || data.length === 0) {
-    container.innerHTML = `
-      <div class="project-card muted">
-        <p class="project-label">Future</p>
-        <h3>No projects yet</h3>
-        <p>Projects added from the backend will appear here.</p>
-      </div>
-    `;
-    return;
-  }
-
-  container.innerHTML = data.map(project => `
-    <a class="project-card" href="project.html?slug=${encodeURIComponent(project.slug)}">
-      <p class="project-label">Project</p>
-      <h3>${project.title}</h3>
-      <p>${project.summary || ""}</p>
-    </a>
-  `).join("");
+/* Theme */
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") {
+  document.body.classList.add("dark");
 }
 
-loadProjects();
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    const currentTheme = document.body.classList.contains("dark") ? "dark" : "light";
+    localStorage.setItem("theme", currentTheme);
+  });
+}
+
+/* Main page projects only
+   Later replace demoProjects with backend data */
+const demoProjects = [
+  {
+    label: "Demo",
+    title: "Project Placeholder",
+    summary: "Project page structure for future work.",
+    href: "project.html"
+  },
+  {
+    label: "Future",
+    title: "Coming Later",
+    summary: "New projects will be added here.",
+    href: "#",
+    muted: true
+  },
+  {
+    label: "Future",
+    title: "Coming Later",
+    summary: "New projects will be added here.",
+    href: "#",
+    muted: true
+  },
+  {
+    label: "Future",
+    title: "Coming Later",
+    summary: "New projects will be added here.",
+    href: "#",
+    muted: true
+  }
+];
+
+function renderProjects() {
+  if (!projectGrid) return;
+
+  projectGrid.innerHTML = demoProjects
+    .map((project) => {
+      if (project.muted) {
+        return `
+          <div class="project-card muted">
+            <p class="project-label">${project.label}</p>
+            <h3>${project.title}</h3>
+            <p>${project.summary}</p>
+          </div>
+        `;
+      }
+
+      return `
+        <a class="project-card" href="${project.href}">
+          <p class="project-label">${project.label}</p>
+          <h3>${project.title}</h3>
+          <p>${project.summary}</p>
+        </a>
+      `;
+    })
+    .join("");
+}
+
+renderProjects();

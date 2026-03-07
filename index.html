@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Omkar Mishra — Coming Soon</title>
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-deep: #02040a;
+      --text: rgba(255, 255, 255, 0.96);
+      --muted: rgba(255, 255, 255, 0.62);
+      --soft: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.10);
+      --cyan: #67e8f9;
+      --violet: #c084fc;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow: hidden;
+    }
+
+    body {
+      position: relative;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, rgba(56, 189, 248, 0.14), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.12), transparent 30%),
+        linear-gradient(to bottom, #04070f, #050816, #02040a);
+    }
+
+    .grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.14) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.14) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      opacity: 0.05;
+      background-image:
+        radial-gradient(circle at 20% 20%, white 0.7px, transparent 0.8px),
+        radial-gradient(circle at 80% 40%, white 0.7px, transparent 0.8px),
+        radial-gradient(circle at 40% 70%, white 0.7px, transparent 0.8px);
+      background-size: 120px 120px;
+      mix-blend-mode: soft-light;
+      pointer-events: none;
+    }
+
+    .glow {
+      position: fixed;
+      border-radius: 999px;
+      filter: blur(80px);
+      animation: pulse 5s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .glow.cyan-1 {
+      width: 320px;
+      height: 320px;
+      left: -80px;
+      top: 40px;
+      background: rgba(34, 211, 238, 0.10);
+    }
+
+    .glow.violet-1 {
+      width: 360px;
+      height: 360px;
+      right: -30px;
+      top: 30%;
+      background: rgba(168, 85, 247, 0.10);
+      animation-delay: 1s;
+    }
+
+    .glow.cyan-2 {
+      width: 260px;
+      height: 260px;
+      left: 35%;
+      bottom: -40px;
+      background: rgba(125, 211, 252, 0.10);
+      animation-delay: 2s;
+    }
+
+    .ring {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .ring.one {
+      width: 540px;
+      height: 540px;
+      border: 1px solid rgba(103, 232, 249, 0.10);
+      animation: rotateSlow 28s linear infinite;
+    }
+
+    .ring.two {
+      width: 700px;
+      height: 700px;
+      border: 1px solid rgba(192, 132, 252, 0.10);
+      animation: rotateSlowReverse 40s linear infinite;
+    }
+
+    .ring.three {
+      width: 900px;
+      height: 900px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      animation: rotateSlow 60s linear infinite;
+    }
+
+    .line {
+      position: fixed;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.75), transparent);
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .line.a {
+      width: 140px;
+      left: 8%;
+      top: 22%;
+      transform: rotate(18deg);
+      background: linear-gradient(to right, transparent, rgba(103,232,249,0.8), transparent);
+    }
+
+    .line.b {
+      width: 110px;
+      right: 10%;
+      top: 70%;
+      transform: rotate(-28deg);
+      background: linear-gradient(to right, transparent, rgba(192,132,252,0.8), transparent);
+    }
+
+    .line.c {
+      width: 90px;
+      left: 62%;
+      top: 16%;
+      transform: rotate(42deg);
+      background: linear-gradient(to right, transparent, rgba(255,255,255,0.7), transparent);
+    }
+
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.85);
+      box-shadow: 0 0 16px rgba(255,255,255,0.75);
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .content {
+      width: 100%;
+      max-width: 1000px;
+      text-align: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(18px);
+      border-radius: 999px;
+      margin-bottom: 26px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+    }
+
+    .pill-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 14px rgba(103,232,249,0.95);
+    }
+
+    .pill-text {
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.66);
+      white-space: nowrap;
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 8vw, 6.5rem);
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      line-height: 1.05;
+      background: linear-gradient(to right, #ffffff, #d6f6ff, #e8d7ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 30px rgba(125,211,252,0.08);
+    }
+
+    .divider {
+      width: 160px;
+      height: 1px;
+      margin: 24px auto 0;
+      background: linear-gradient(to right, transparent, rgba(103,232,249,0.8), transparent);
+    }
+
+    .subtitle {
+      max-width: 780px;
+      margin: 30px auto 0;
+      font-size: clamp(1rem, 2vw, 1.16rem);
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .status-card {
+      display: inline-block;
+      margin-top: 36px;
+      padding: 18px 28px;
+      border-radius: 32px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(24px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.28), 0 0 40px rgba(34,211,238,0.04);
+    }
+
+    .status-label {
+      font-size: 12px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .status-text {
+      margin-top: 10px;
+      font-size: clamp(1.55rem, 4vw, 2.25rem);
+      letter-spacing: 0.22em;
+      font-weight: 500;
+      color: rgba(255,255,255,0.96);
+    }
+
+    .tags {
+      margin: 42px auto 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      max-width: 700px;
+    }
+
+    .tag {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.42);
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      backdrop-filter: blur(12px);
+    }
+
+    .bottom-line {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(103,232,249,0.55), transparent);
+      pointer-events: none;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.9; }
+      50% { transform: scale(1.08); opacity: 1; }
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.35; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    @keyframes rotateSlow {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes rotateSlowReverse {
+      from { transform: translate(-50%, -50%) rotate(360deg); }
+      to { transform: translate(-50%, -50%) rotate(0deg); }
+    }
+
+    @media (max-width: 768px) {
+      html, body {
+        overflow: hidden;
+      }
+
+      .ring.one { width: 380px; height: 380px; }
+      .ring.two { width: 520px; height: 520px; }
+      .ring.three { width: 680px; height: 680px; }
+
+      .pill-text,
+      .status-label,
+      .tag {
+        letter-spacing: 0.18em;
+      }
+
+      .subtitle {
+        padding: 0 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="noise"></div>
+
+  <div class="glow cyan-1"></div>
+  <div class="glow violet-1"></div>
+  <div class="glow cyan-2"></div>
+
+  <div class="ring one"></div>
+  <div class="ring two"></div>
+  <div class="ring three"></div>
+
+  <div class="line a"></div>
+  <div class="line b"></div>
+  <div class="line c"></div>
+
+  <div class="particles" id="particles"></div>
+
+  <main class="container">
+    <section class="content">
+      <div class="pill">
+        <span class="pill-dot"></span>
+        <span class="pill-text">Personal Lab • Research • Projects</span>
+      </div>
+
+      <h1>OMKAR MISHRA</h1>
+      <div class="divider"></div>
+
+      <p class="subtitle">
+        A minimal digital space for projects, simulations, research notes, ideas, experiments, and everything I am building.
+      </p>
+
+      <div class="status-card">
+        <div class="status-label">Status</div>
+        <div class="status-text">Coming Soon</div>
+      </div>
+
+      <div class="tags">
+        <span class="tag">Docs</span>
+        <span class="tag">Simulations</span>
+        <span class="tag">Research</span>
+        <span class="tag">Experiments</span>
+      </div>
+    </section>
+  </main>
+
+  <div class="bottom-line"></div>
+
+  <script>
+    const particlesContainer = document.getElementById('particles');
+    const positions = [
+      ['12%', '18%'], ['22%', '72%'], ['78%', '22%'], ['84%', '64%'],
+      ['52%', '14%'], ['61%', '82%'], ['36%', '30%'], ['70%', '48%'],
+      ['16%', '46%'], ['46%', '88%'], ['90%', '36%'], ['8%', '86%'],
+      ['28%', '12%'], ['74%', '80%'], ['58%', '58%'], ['33%', '84%']
+    ];
+
+    positions.forEach((pos, i) => {
+      const particle = document.createElement('span');
+      particle.className = 'particle';
+      particle.style.left = pos[0];
+      particle.style.top = pos[1];
+      particle.style.animationDuration = `${2 + (i % 4)}s`;
+      particle.style.width = `${4 + (i % 3)}px`;
+      particle.style.height = particle.style.width;
+      particlesContainer.appendChild(particle);
+    });
+  </script>
+</body>
+</html>

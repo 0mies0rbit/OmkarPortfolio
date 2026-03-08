@@ -17,7 +17,7 @@ if (menuToggle && navLinks) {
 
 /* Theme */
 const savedTheme = localStorage.getItem("theme");
-if (savedTheme === "dark") {
+if (savedTheme === "light") {
   document.body.classList.add("dark");
 }
 
@@ -38,27 +38,7 @@ const demoProjects = [
     summary: "Project page structure for future work.",
     href: "project.html"
   },
-  {
-    label: "Future",
-    title: "Coming Later",
-    summary: "New projects will be added here.",
-    href: "#",
-    muted: true
-  },
-  {
-    label: "Future",
-    title: "Coming Later",
-    summary: "New projects will be added here.",
-    href: "#",
-    muted: true
-  },
-  {
-    label: "Future",
-    title: "Coming Later",
-    summary: "New projects will be added here.",
-    href: "#",
-    muted: true
-  }
+  
 ];
 
 function renderProjects() {

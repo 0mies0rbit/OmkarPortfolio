@@ -77,9 +77,9 @@ a {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-  background-size: 20px 30px;
+    linear-gradient(to right, var(--grid-line) 1.5px, transparent 1.5px),
+    linear-gradient(to bottom, var(--grid-line) 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
   -webkit-mask-image: radial-gradient(
     ellipse 70% 60% at 50% 0%,
     #000 60%,
@@ -331,11 +331,11 @@ h1 {
 }
 
 .main-container:hover .text {
-  color: var(--tooltip-accent);
+  color: rgb(8, 173, 24);
 }
 
 .tooltip-container {
-  --background: var(--tooltip-accent);
+  --background: rgb(138, 56, 219);
   position: relative;
   cursor: pointer;
   display: flex;
@@ -352,12 +352,12 @@ h1 {
   position: absolute;
   top: 20px;
   left: 32%;
+  color: rgb(255, 255, 255);
   transform: translateX(-50%);
   padding: 0.3em 0.6em;
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s;
-  color: #fff;
   background: var(--background);
   white-space: nowrap;
   font-size: 0.86rem;
@@ -635,7 +635,7 @@ h1 {
   --input-focus: var(--text);
   --bg-color: var(--surface-strong);
   --bg-color-alt: var(--text-soft);
-  --main-color: var(--text);
+  --main-color: rgb(183, 116, 116);
   --input-out-of-focus: var(--line);
 
   position: relative;

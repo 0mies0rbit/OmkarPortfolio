@@ -85,7 +85,7 @@ function renderProject(project) {
 
 // Array of video sources (replace with your actual video paths)
 const videoSources = [
-    '/images/movie.mp4'
+    'movie.mp4'
 ];
 
 const container = document.getElementById('video-container');
@@ -117,3 +117,4 @@ videoSources.forEach(videoSrc => {
     videoWrapper.appendChild(videoElement);
     container.appendChild(videoWrapper);
 });
+

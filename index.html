@@ -4,15 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Omkar Mishra</title>
-<link rel="icon" href="myicon.jpg" type="image/png">
+  <link rel="icon" href="/images/myicon.jpg" type="image/png" />
   <meta
     name="description"
     content="Omkar Mishra — computational astrophysics portfolio"
   />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:wght@600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Source+Serif+4:wght@600;700&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="styles.css" />
@@ -22,6 +22,11 @@
     <div class="grid-background"></div>
   </div>
 
+  <div class="noise-layer"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+  <div class="glow glow-3"></div>
+
   <header class="site-header">
     <div class="container nav">
       <a href="#" class="brand">Omkar Mishra</a>
@@ -30,15 +35,18 @@
         <nav class="nav-links" id="navLinks">
           <a href="#about">About</a>
           <a href="#projects">Projects</a>
+          <a href="#research-log">Research Log</a>
+          <a href="#blogs">Blogs</a>
           <a href="#contact">Contact</a>
         </nav>
 
-        <label class="switch">
-          <input type="checkbox" class="toggle" id="themeToggle">
-          <span class="slider"></span>
-        </label>
+        <button class="theme-toggle-pro" id="themeToggle" aria-label="Toggle theme" type="button">
+          <span class="theme-toggle-pro__track"></span>
+          <span class="theme-toggle-pro__label theme-toggle-pro__label--light">Light</span>
+          <span class="theme-toggle-pro__label theme-toggle-pro__label--dark">Dark</span>
+        </button>
 
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" type="button">
           <span></span>
           <span></span>
         </button>
@@ -49,13 +57,22 @@
   <main>
     <section class="hero section" id="about">
       <div class="container hero-layout">
-        <div class="hero-copy">
-          <p class="eyebrow">Computational Astrophysics</p>
-          <h1>Omkar Mishra</h1>
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Computational Astrophysics / Scientific Computing</p>
+
+          <div class="hero-title-wrap">
+            <p class="hero-mini-line">Simulation • Inference • Numerical Methods • Orbital Dynamics</p>
+            <h1>
+              Building toward
+              <span class="gradient-text">computational astrophysics</span>
+              with research-driven code and ambitious technical work.
+            </h1>
+          </div>
+
           <p class="role">B.Tech IT Undergraduate</p>
           <p class="about-text">
             Working on high-performance computing, N-body orbital dynamics,
-            physics informed neural networks(PINN) and simulation driven scientific workflows.
+            physics-informed neural networks, scientific software, and simulation-driven workflows.
           </p>
 
           <div class="hero-actions">
@@ -67,34 +84,91 @@
             >
               GitHub
             </a>
-            <a class="btn btn-light" href="#projects">Projects</a>
+            <a class="btn btn-light" href="#projects">Explore Work</a>
+          </div>
+
+          <div class="hero-metrics">
+            <div class="metric-card">
+              <span class="metric-label">Direction</span>
+              <strong>Computational Astrophysics</strong>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label">Focus</span>
+              <strong>Simulation + Numerics</strong>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label">Arc</span>
+              <strong>Research Internships</strong>
+            </div>
           </div>
         </div>
 
-        <aside class="hero-side">
-          <div class="info-card">
-            <p class="card-label">Current Stack</p>
-            <div class="tag-grid">
-              <span>Python</span>
-              <span>NumPy</span>
-              <span>PyTorch</span>
-              <span>REBOUND</span>
-              <span>C</span>
-              <span>HPC</span>
-              <span>Simulation</span>
-              <span>Data Analysis</span>
-              <span>Scientific Computing</span>
+        <aside class="hero-side reveal delay-1">
+          <div class="info-card stack-card">
+            <div class="stack-card__top">
+              <div class="stack-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <p class="card-label">Current Stack</p>
+            </div>
+
+            <div class="tag-grid tag-grid-advanced" id="stackGrid">
+              <div class="stack-chip" data-title="Python" data-desc="Main language for scientific coding, prototyping, analysis, automation, and backend work.">
+                <span>Python</span>
+                <i></i>
+              </div>
+              <div class="stack-chip" data-title="NumPy" data-desc="Core numerical arrays, vectorization, matrix work, and fast scientific computation.">
+                <span>NumPy</span>
+                <i></i>
+              </div>
+              <div class="stack-chip" data-title="PyTorch" data-desc="For machine learning, differentiable systems, and future physics-informed models.">
+                <span>PyTorch</span>
+                <i></i>
+              </div>
+              <div class="stack-chip" data-title="REBOUND" data-desc="N-body and orbital dynamics simulation tool aligned with computational astrophysics work.">
+                <span>REBOUND</span>
+                <i></i>
+              </div>
+              <div class="stack-chip" data-title="C" data-desc="Useful for lower-level thinking, performance sensitivity, and stronger systems understanding.">
+                <span>C</span>
+                <i></i>
+              </div>
+              <div class="stack-chip" data-title="HPC" data-desc="Parallelism, scale, compute efficiency, and the mindset needed for serious scientific workloads.">
+                <span>HPC</span>
+                <i></i>
+              </div>
+              <div class="stack-chip" data-title="Simulation" data-desc="Modeling systems, running experiments, stress-testing assumptions, and learning from outputs.">
+                <span>Simulation</span>
+                <i></i>
+              </div>
+              <div class="stack-chip" data-title="Data Analysis" data-desc="Cleaning, visualizing, interpreting, and extracting insight from scientific data.">
+                <span>Data Analysis</span>
+                <i></i>
+              </div>
+              <div class="stack-chip" data-title="Scientific Computing" data-desc="The bridge between mathematics, algorithms, numerical methods, and research execution.">
+                <span>Scientific Computing</span>
+                <i></i>
+              </div>
+            </div>
+
+            <div class="stack-preview" id="stackPreview">
+              <p class="stack-preview__kicker">Stack Focus</p>
+              <h3 id="stackPreviewTitle">Scientific Toolkit</h3>
+              <p id="stackPreviewDesc">
+                Hover a chip to inspect what role it plays in the overall direction.
+              </p>
             </div>
           </div>
 
           <div class="read-card">
             <p class="read-card__label">Notes</p>
-            <div class="main-container">
-              <p>This is where I keep</p>
-              <div class="tooltip-container">
-                <span class="tooltip">Technical notes and logs</span>
-                <div class="text">read</div>
-                <p>things.</p>
+            <div class="notes-orbit">
+              <div class="notes-orbit__ring"></div>
+              <div class="notes-orbit__ring notes-orbit__ring--inner"></div>
+              <div class="notes-orbit__dot notes-orbit__dot--1"></div>
+              <div class="notes-orbit__dot notes-orbit__dot--2"></div>
+              <div class="notes-orbit__content">
+                <p>A living archive of research thinking, technical direction, and project development.</p>
               </div>
             </div>
           </div>
@@ -102,29 +176,73 @@
       </div>
     </section>
 
-    <section class="section projects-section" id="projects">
+    <section class="section strip-section reveal">
       <div class="container">
-        <div class="section-head">
-          <div>
-            <p class="section-kicker">Projects</p>
-            <h2 class="section-title">Work</h2>
-          </div>
-        </div>
-
-        <div class="project-grid" id="projectGrid">
-          <!-- JS injects cards -->
+        <div class="signal-strip">
+          <span>Orbital Dynamics</span>
+          <span>Numerical Stability</span>
+          <span>Scientific ML</span>
+          <span>Simulation Pipelines</span>
+          <span>High Performance Computing</span>
+          <span>Research Writing</span>
         </div>
       </div>
     </section>
 
+    <section class="section projects-section" id="projects">
+      <div class="container">
+        <div class="section-head section-head-wide reveal">
+          <div>
+            <p class="section-kicker">Selected Work</p>
+            <h2 class="section-title">Projects & Research Builds</h2>
+          </div>
+          <p class="section-side-text">
+            A growing archive of technical builds, research case studies, and future astrophysics-oriented work.
+          </p>
+        </div>
+
+        <div class="project-grid" id="projectGrid"></div>
+      </div>
+    </section>
+
+    <section class="section research-log-section" id="research-log">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="section-kicker">Research Log</p>
+            <h2 class="section-title">Ongoing Notes</h2>
+          </div>
+        </div>
+        <div class="research-log-grid" id="researchLogGrid"></div>
+        <article class="log-card reveal">
+          <div class="log-card__meta">
+            <span>Current</span>
+            <span>Notes</span>
+          </div>
+          
+        </article>
+      </div>
+    </section>
+
+    <section class="section blogs-section" id="blogs">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="section-kicker">Blogs</p>
+            <h2 class="section-title">Essays, notes, and technical writing</h2>
+          </div>
+        </div>
+
+        <div class="blog-grid" id="blogGrid"></div>
+      </div>
+    </section>
+
     <section class="section contact-section" id="contact">
-      <div class="container contact-shell">
+      <div class="container contact-shell reveal">
         <div class="contact-copy">
           <p class="section-kicker">Contact</p>
           <h2 class="section-title">Links</h2>
-          <p class="contact-text">
-            omkarmishra@nehu.ac.in
-          </p>
+          <p class="contact-text">omkarmishra@nehu.ac.in</p>
         </div>
 
         <ul class="example-2">
@@ -161,11 +279,7 @@
           </li>
 
           <li class="icon-content">
-            <a
-              data-social="scholar"
-              aria-label="Google Scholar"
-              href="#"
-            >
+            <a data-social="scholar" aria-label="Google Scholar" href="#">
               <div class="filled"></div>
               <svg viewBox="0 0 24 24" fill="currentColor" height="20" width="20" aria-hidden="true">
                 <path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3Zm-7 9.18V16l7 3.82L19 16v-3.82l-7 3.82-7-3.82Z"/>
